@@ -17,6 +17,14 @@ DefenseIQ-tech-learning platform is a full-stack cybersecurity/tech related lear
 - Worker scaffold
 - Sample seed data
 
+## System Architecture
+![System Architecture](docs/diagrams/system-architecture.png)
+
+## Platform Workflow
+![Platform Workflow](docs/diagrams/platform-workflow.png)
+
+## Security Architecture
+![Security Architecture](docs/diagrams/security-architecture.png)
 ## Quick start
 
 ### Start dependencies
