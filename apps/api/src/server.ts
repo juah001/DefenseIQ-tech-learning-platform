@@ -22,6 +22,10 @@ app.get("/", (_req, res) => {
   res.json({ name: "Tech Learning Platform API", status: "ok" });
 });
 
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
+
 app.use("/auth", authRouter);
 app.use("/decks", decksRouter);
 app.use("/cards", cardsRouter);
