@@ -2,6 +2,20 @@
 
 DefenseIQ-tech-learning platform is a full-stack cybersecurity/tech related learning platform that combines spaced repetition, AI-assisted study, progress analytics,
 and hands-on labs to help students, developers, and security professionals learn technical concepts through:
+- project overview
+- live demo section
+- architecture diagrams
+- features
+- tech stack
+- monorepo structure
+- setup instructions
+- deployment guide link
+- API docs link
+- CI/CD mention
+- security section
+- roadmap
+- author
+- licnese
 - spaced repetition learning
 - AI-assisted study tools
 - progress analytics
@@ -225,6 +239,8 @@ Planned improvements:
 - AI-generated quizzes
 - real-time collaborative study rooms
 
+LICENSE:
+MIT License
 
 Author
 
