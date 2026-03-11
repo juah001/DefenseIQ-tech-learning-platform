@@ -3,14 +3,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "tsx watch src/server.ts"
-
-"scripts": {
-  "dev": "tsx watch src/server.ts",
-  "build": "tsc",
-  "start": "node dist/server.js"
-}
-    
+    "dev": "tsx watch src/server.ts"  
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
@@ -30,4 +23,10 @@
     "tsx": "^4.19.2",
     "typescript": "^5.7.2"
   }
+}
+
+"scripts": {
+  "dev": "tsx watch src/server.ts",
+  "build": "tsc",
+  "start": "node dist/server.js"
 }
