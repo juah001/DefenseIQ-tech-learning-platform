@@ -1,6 +1,8 @@
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 async function getCards() {
   try {
-    const res = await fetch("http://localhost:5000/cards/due", { cache: "no-store" });
+    const res = await fetch(`${API}/cards/due`, { cache: "no-store" });
     return res.json();
   } catch {
     return [];
