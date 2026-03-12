@@ -1,27 +1,67 @@
 import { Router } from "express";
+import { z } from "zod";
 import { query } from "../../lib/db.js";
 
-export const analyticsRouter = Router();
+export const marketplaceRouter = Router();
 
-analyticsRouter.get("/progress", async (_req, res) => {
-  const cardsCount = await query<{ count: string }>(
-    "SELECT COUNT(*)::text AS count FROM cards"
+const publishSchema = z.object({
+  deckId: z.number()
+});
+
+marketplaceRouter.get("/decks", async (_req, res) => {
+  const result = await query(
+    `
+    SELECT
+      ml.id,
+      d.name AS title,
+      ml.rating,
+      ml.downloads,
+      COALESCE(u.display_name, 'Community') AS author
+    FROM marketplace_listings ml
+    JOIN decks d ON d.id = ml.deck_id
+    LEFT JOIN users u ON u.id = d.owner_id
+    ORDER BY ml.published_at DESC
+    `
   );
 
-  const decksCount = await query<{ count: string }>(
-    "SELECT COUNT(*)::text AS count FROM decks"
+  res.json(result.rows);
+});
+
+marketplaceRouter.post("/publish", async (req, res) => {
+  const parsed = publishSchema.safeParse(req.body);
+  if (!parsed.success) {
+    return res.status(400).json(parsed.error.flatten());
+  }
+
+  const inserted = await query(
+    `
+    INSERT INTO marketplace_listings (deck_id, rating, downloads)
+    VALUES ($1, 5.0, 0)
+    RETURNING id, deck_id
+    `,
+    [parsed.data.deckId]
   );
 
-  const totalCards = Number(cardsCount.rows[0]?.count || 0);
-  const totalDecks = Number(decksCount.rows[0]?.count || 0);
+  const listingId = inserted.rows[0]?.id;
 
-  res.json({
-    cardsReviewedToday: Math.min(totalCards, 47),
-    studyStreak: 12,
-    accuracy: 86,
-    masteryLevel: totalDecks > 0 ? 68 : 0,
-    weakTopics: ["Cryptography", "Web Exploitation"],
-    strongTopics: ["Linux", "Networking"],
-    weeklyReviews: [12, 19, 26, 33, 30, 42, 47]
+  const listing = await query(
+    `
+    SELECT
+      ml.id,
+      d.name AS title,
+      ml.rating,
+      ml.downloads,
+      COALESCE(u.display_name, 'Community') AS author
+    FROM marketplace_listings ml
+    JOIN decks d ON d.id = ml.deck_id
+    LEFT JOIN users u ON u.id = d.owner_id
+    WHERE ml.id = $1
+    `,
+    [listingId]
+  );
+
+  res.status(201).json({
+    message: "Deck published",
+    listing: listing.rows[0]
   });
 });
