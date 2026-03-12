@@ -1,12 +1,9 @@
 # DefenseIQ
 
 DefenseIQ-tech-learning platform is a full-stack cybersecurity/tech related learning platform that combines spaced repetition, AI-assisted study, progress analytics,
-and hands-on labs to help students, developers, and security professionals learn technical concepts through:
-# DefenseIQ
+and hands-on labs to help students, developers, and security professionals learn technical concepts.
 
-DefenseIQ is a full-stack cybersecurity learning platform designed to help students, developers, and technical learners study more effectively through spaced repetition, AI-assisted learning, progress analytics, deck sharing, and hands-on lab scaffolds.
-
-## What this project demonstrates
+## What this project demonstrates:
 
 - full-stack application architecture
 - monorepo organization
