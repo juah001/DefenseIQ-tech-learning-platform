@@ -1,6 +1,13 @@
-apps/api/src/modules/auth/auth.routes.ts
-apps/api/src/modules/decks/decks.routes.ts
-apps/api/src/modules/cards/cards.routes.ts
-apps/api/src/modules/reviews/reviews.routes.ts
-apps/api/src/modules/analytics/analytics.routes.ts
-apps/api/src/modules/marketplace/marketplace.routes.ts
+import { Pool } from "pg";
+
+const connectionString =
+  process.env.DATABASE_URL ||
+  "postgres://postgres:postgres@localhost:5432/techlearning";
+
+export const pool = new Pool({
+  connectionString
+});
+
+export async function query<T = unknown>(text: string, params: unknown[] = []) {
+  return pool.query<T>(text, params);
+}
