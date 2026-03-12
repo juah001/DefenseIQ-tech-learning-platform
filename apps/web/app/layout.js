@@ -1,8 +1,8 @@
 import "./globals.css";
 
 export const metadata = {
-  title: "Tech Learning Platform",
-  description: "Next-level study platform"
+  title: "DefenseIQ",
+  description: "Next level Cybersecurity study platform"
 };
 
 export default function RootLayout({ children }) {
