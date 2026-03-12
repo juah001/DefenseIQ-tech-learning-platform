@@ -1,6 +1,8 @@
+const API = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000";
+
 async function getLabs() {
   try {
-    const res = await fetch("http://localhost:5000/labs", { cache: "no-store" });
+    const res = await fetch(`${API}/labs`, { cache: "no-store" });
     return res.json();
   } catch {
     return [];
