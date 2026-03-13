@@ -1,5 +1,4 @@
-
-import { Pool } from "pg";
+import { Pool, QueryResult } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
@@ -8,7 +7,6 @@ const pool = new Pool({
 export async function query<T = any>(
   text: string,
   params?: any[]
-): Promise<T[]> {
-  const res = await pool.query(text, params);
-  return res.rows;
+): Promise<QueryResult<T>> {
+  return pool.query(text, params);
 }
