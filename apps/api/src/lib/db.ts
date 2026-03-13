@@ -1,16 +1,14 @@
 
-import { Pool } from 'pg';
-import type { QueryResultRow } from 'pg';
+import { Pool } from "pg";
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL,
 });
 
-export async function query<T extends QueryResultRow>(
+export async function query<T = any>(
   text: string,
-  params?: unknown[]
-) {
-  return pool.query<T>(text, params);
+  params?: any[]
+): Promise<T[]> {
+  const res = await pool.query(text, params);
+  return res.rows;
 }
-
-export default pool;
