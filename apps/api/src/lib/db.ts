@@ -1,13 +1,14 @@
-import { Pool } from "pg";
+import { Pool, QueryResultRow } from 'pg';
 
-const connectionString =
-  process.env.DATABASE_URL ||
-  "postgres://postgres:postgres@localhost:5432/techlearning";
-
-export const pool = new Pool({
-  connectionString
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
 });
 
-export async function query<T = unknown>(text: string, params: unknown[] = []) {
+export async function query<T extends QueryResultRow>(
+  text: string,
+  params?: unknown[]
+) {
   return pool.query<T>(text, params);
 }
+
+export default pool;
