@@ -8,7 +8,7 @@ const publishSchema = z.object({
   deckId: z.number()
 });
 
-marketplaceRouter.get("/decks", async (_req, res) => {
+marketplaceRouter.get("/marketplace/decks", async (_req, res) => {
   const result = await query(
     `
     SELECT
